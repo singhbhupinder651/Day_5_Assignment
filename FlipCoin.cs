@@ -4,45 +4,44 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Day5FunProblem
+namespace CoreAndFunctionalProgramming
 {
-    internal class FlipCoin
+    public static class FlipCoin
     {
-        public void Flip_Percentage()
+        public static void CalculatePercentage()
         {
-            int HEAD = 0;
-            int TAIL = 0;
+            int numOfHeads = 0, numOfTails = 0;
+            Random random = new Random();
 
-            Console.WriteLine("Enter the number of time to flip the coin");
-            int numberOfFlips = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter a number for number of flips: ");
+            int numOfFlips = Convert.ToInt32(Console.ReadLine());
 
-            while (numberOfFlips <= 0)
+            if (numOfFlips > 0)
             {
-                Console.WriteLine("Enter the valid number greater than Zero");
-                numberOfFlips = Convert.ToInt32(Console.ReadLine());
-            }
-
-            for (int i = 0; i < numberOfFlips; i++)
-            {
+                int numOfHeads = 0, numOfTails = 0;
                 Random random = new Random();
-                int value = random.Next(0, 2);
-
-                if (value < 0.5)
+                for (int i = 0; i < numOfFlips; i++)
                 {
-                    HEAD++;
+                    int flipResult = random.Next(0, 2);
+                    if (flipResult > 0.5)
+                    {
+                        numOfHeads++;
+                    }
+                    else
+                    {
+                        numOfTails++;
+                    }
+                    Console.WriteLine("Heads: {0}\tTails: {1}", numOfHeads, numOfTails);
                 }
-                else
-                {
-                    TAIL++;
-                }
+                double percentHead = (double)numOfHeads / (double)numOfFlips * 100;
+                double percentTail = (double)numOfTails / (double)numOfFlips * 100;
+                Console.WriteLine("Percentage of heads: {0}%", percentHead);
+                Console.WriteLine("Percentage of tails: {0}%", percentTail);
             }
-
-            float headPercent = (float)HEAD * 100 / numberOfFlips;
-            float tailPercent = (float)TAIL * 100 / numberOfFlips;
-
-            Console.WriteLine("Head percentage is:" + headPercent);
-            Console.WriteLine("Tail percentage is:" + tailPercent);
-
+            else
+            {
+                Console.WriteLine("Please enter a positive number");
+            }
         }
     }
 }
